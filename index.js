@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-const TOKEN = "MzU2OTI5OTg3OTM0NDIxMDA0.DJigpg.AfnG_fnh6u4NPG6U5KaEh4qXDrE";
+const Credentials = require("credentials.js");
 
 var bot = new Discord.Client();
 
