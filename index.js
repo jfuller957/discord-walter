@@ -1,18 +1,25 @@
-const Discord = require("discord.js");
 
-const Credentials = require("credentials.js");
+// dependencies
+const Discord = require ("discord.js");
+const credentials = require ("credentials.js");
 
-var bot = new Discord.Client();
+// Make a new bot
+var bot = new Discord.Client ();
 
-bot.on("ready", function() {
-	console.log("Ready");
+// Bot is online
+bot.on ("ready", function () {
+	console.log ("Ready");
 });
 
-bot.on("message", function(message) {
-	if(message.author.equals(bot.user)) return;
-	if(message.content === "hello") {
-		message.channel.sendMessage("Hi there!");
-	}
+// Bot is listening to messages
+bot.on ("message", function(message) {
+	// This is the bot talking, it will ignore this.
+	if (message.author.equals(bot.user)) return;
+
+	// Simple test message
+	if (message.content === "hello") {
+		message.channel.sendMessage ("Hi there!");
+	};
 });
 
-bot.login(TOKEN);
+bot.login (TOKEN);
