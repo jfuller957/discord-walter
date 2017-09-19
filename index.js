@@ -13,7 +13,7 @@ bot.on("ready", function () {
 
 // listen for commands
 bot.on("message", function (message) {
-// make bot respond to the word hello
+ // make bot respond to the word hello
  if (message.content === "hello") {
   message.reply("Well, hello there!");
   }
