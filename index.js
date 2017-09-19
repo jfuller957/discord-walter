@@ -2,6 +2,7 @@
 const Discord     = require("discord.js");
 const credentials = require("./credentials.js");
 const yahooStocks = require("yahoo-stocks");
+const weather    = require("weather-js");
 
 // make new bot
 const bot = new Discord.Client();
@@ -33,7 +34,21 @@ bot.on("message", function (message) {
         yahooStocks.lookup(contents[1]).then(function (response) {
             message.reply("```css\n" + response.currentPrice + "\n```");
         });
-    }
+    };
+
+    // weather command
+    if (contents[0] === "!weather") {
+        var weather = require('weather-js');
+          
+        // search:     location name or zipcode 
+        // Options available are search by location name or zipcode and select degree type: F or C 
+        weather.find({search: contents.slice(1, 4).join(" "), degreeType: 'F'}, function(err, result) {
+            if(err) console.log(err);
+        
+            message.reply(JSON.stringify(result, null, 2));
+            console.log(JSON.stringify(result, null, 2));
+        });
+    };
 
 });
 
