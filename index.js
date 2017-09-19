@@ -1,5 +1,5 @@
 // dependencies
-const Discord = require("discord.js");
+const Discord     = require("discord.js");
 const credentials = require("./credentials.js");
 const yahooStocks = require("yahoo-stocks");
 
@@ -16,7 +16,7 @@ bot.on("message", function (message) {
     // make bot respond to the word hello
     if (message.content === "hello") {
         message.reply("Well, hello there!");
-        }
+        };
 
     // take the incoming message and make an array out of each word separating them at the spaces
     let contents = message.content.split(" ");
