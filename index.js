@@ -1,25 +1,51 @@
 
 // dependencies
-const Discord = require ("discord.js");
-const credentials = require ("credentials.js");
 
-// Make a new bot
-var bot = new Discord.Client ();
+const Discord = require("discord.js");
+const credentials = require("./credentials.js");
+const yahooStocks = require("yahoo-stocks");
 
-// Bot is online
-bot.on ("ready", function () {
-	console.log ("Ready");
+//make new bot
+
+const bot = new Discord.Client();
+
+//message to announce bot is functioning.
+
+bot.on("ready", function () {
+	console.log("I am ready!");
 });
 
-// Bot is listening to messages
-bot.on ("message", function(message) {
-	// This is the bot talking, it will ignore this.
-	if (message.author.equals(bot.user)) return;
+//make bot respond to the word hello
 
-	// Simple test message
+bot.on("message", function (message) {
 	if (message.content === "hello") {
-		message.channel.sendMessage ("Hi there!");
+		message.reply("Well, hello there!");
+	}
+
+	//take the incoming message and make an array out of each word separating them at the spaces
+	let contents = message.content.split(" ");
+
+	//check for commands
+
+	//Help command
+	if (contents[0] === "!walter") {
+		message.reply("```css\n" + "Walter's abilities\n\n* !stock - Look up the current price of a stock.\n* !weather - Give current temp in given zip code.\n" + "\n```");
 	};
+
+	//stock command
+	if (contents[0] === "!stock") {
+		message.reply("Ok I will look up " + contents[1] + "!");
+
+		yahooStocks.lookup(contents[1]).then(function (response) {
+			message.reply("```js\n" + response.currentPrice + "\n```");
+		});
+	}
+
 });
 
-bot.login (TOKEN);
+
+
+//log bot in with its token
+
+bot.login(token);
+
