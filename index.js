@@ -26,7 +26,7 @@ bot.on("message", function (message) {
     if (contents[0] === "!commands") {
         message.channel.send({embed: {
             color: 3447003,
-            description: "Walter's commands:\n\n* !stock - Look up the current price of a stock.\n* !weather - Give current temp in given zip code.\n"
+            description: "Walter's commands:\n\n* !stock - Look up the current price of a stock.\n* !weather - Give current temp in given zip code.\n* !convert - Convert currency between USD CAD and EUR.\n"
         }});
     };
 
