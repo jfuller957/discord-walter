@@ -4,6 +4,10 @@ const credentials   = require("./credentials.js");
 const yahooStocks   = require("yahoo-stocks");
 const weather       = require("weather-js");
 
+const API_KEY = flightToken;
+const options = { write: __dirname + '/data'};
+const qpx           = require('google-flights-api')(API_KEY, options);
+
 // make new bot
 const bot = new Discord.Client();
 
@@ -90,13 +94,24 @@ bot.on("message", function (message) {
             }
             console.log(result);
             message.reply(result);
-        }
-        
+        }        
         convert(contents[1], contents[2], contents[3]);
     };
-
-
-
+    // flight command
+    if (contents[0] === "!flight") {
+     
+    const q = {
+       adultCount: contents[1], 
+       maxPrice: contents[2], 
+       solutions: contents[3], 
+       origin: contents[4],
+       destination: contents[5], 
+       date: contents[6]
+    };
+    qpx.query(q).then((data) => {
+      //data looks like: [ { airline: 'SK', price: 'EUR71.10' } ]
+    }).catch(console.error);
+    };
 });
 
 // log bot in with its token
