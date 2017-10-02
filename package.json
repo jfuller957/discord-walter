@@ -11,6 +11,7 @@
     "license": "ISC",
     "dependencies": {
         "discord.js": "^11.2.1",
+        "flights": "^0.3.1",
         "google-flights-api": "^1.1.5",
         "weather-js": "^2.0.0",
         "yahoo-stocks": "^2.0.1"
