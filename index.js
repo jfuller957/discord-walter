@@ -125,18 +125,18 @@ bot.on("message", function (message) {
                   "latestTime": "22:00"
                 },
                 "permittedCarrier": [
-                  "WN"
+                  "WN"                          // IATA 2 Character Carrier Code
                 ],
                 "prohibitedCarrier": [
-                  "AA"
+                  "AA"                          
                 ]
               }
             ],
-            "maxPrice": "USD2000.00",   // Regex format [A-Z]{3}\d+(\.\d+)?
-            "saleCountry": "US",        // IATA 2 Character Country Code
-            "ticketingCountry": "US",   // IATA 2 Character Country Code
-            "refundable": false,        // Show only refundable flights
-            "solutions": 15             // Number of results
+            "maxPrice": "USD2000.00",           // Regex format [A-Z]{3}\d+(\.\d+)?
+            "saleCountry": "US",                // IATA 2 Character Country Code
+            "ticketingCountry": "US",           // IATA 2 Character Country Code
+            "refundable": false,                // Show only refundable flights
+            "solutions": 15                     // Number of results
           }
         }
          
