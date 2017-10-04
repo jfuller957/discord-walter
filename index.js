@@ -3,7 +3,7 @@ const Discord       = require("discord.js");
 const credentials   = require("./credentials.js");
 const yahooStocks   = require("yahoo-stocks");
 const weather       = require("weather-js");
-const flight        = require("flights");
+const API           = require("qpx-express");
 
 // make new bot
 const bot = new Discord.Client();
@@ -97,7 +97,57 @@ bot.on("message", function (message) {
     // flight command
     if (contents[0] === "!flight") {
 
-    }
+        var apiKey  = flightToken;
+        var qpx     = new API(apiKey);
+         
+        var body = {
+          "request": {
+            "passengers": {
+              "kind": "qpxexpress#passengerCounts",
+              "adultCount": 1,
+              "childCount": 0,
+              "infantInLapCount": 0,
+              "infantInSeatCount": 0,
+              "seniorCount": 0
+            },
+            "slice": [
+              {
+                "kind": "qpxexpress#sliceInput",
+                "origin": "SAN",
+                "destination": "LAX",
+                "date": "2017-11-10",
+                "maxStops": 2,
+                "maxConnectionDuration": 2,
+                "preferredCabin": "COACH",
+                "permittedDepartureTime": {
+                  "kind": "qpxexpress#timeOfDayRange",
+                  "earliestTime": "06:00",
+                  "latestTime": "22:00"
+                },
+                "permittedCarrier": [
+                  "WN"
+                ],
+                "prohibitedCarrier": [
+                  "AA"
+                ]
+              }
+            ],
+            "maxPrice": "USD2000.00",   // Regex format [A-Z]{3}\d+(\.\d+)?
+            "saleCountry": "US",        // IATA 2 Character Country Code
+            "ticketingCountry": "US",   // IATA 2 Character Country Code
+            "refundable": false,        // Show only refundable flights
+            "solutions": 15             // Number of results
+          }
+        }
+         
+        qpx.getInfo(body, function(error, data) {
+            console.log('Heyy!', data);
+            message.channel.send({embed: {
+            color: 3447003,
+            description: JSON.stringify(data)
+            }});
+        });
+    };
 });
 
 // log bot in with its token
